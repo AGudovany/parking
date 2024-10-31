@@ -1,0 +1,44 @@
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api-server
+    env_file:
+      - .env
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    networks:
+      - parking-network
+
+  db:
+    image: postgres:14
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: parking_business
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - parking-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client-app
+    environment:
+      - REACT_APP_API_URL=http://api-server:3000
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+networks:
+  parking-network:
+
+volumes:
+  pgdata:

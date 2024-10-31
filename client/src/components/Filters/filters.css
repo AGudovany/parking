@@ -1,0 +1,35 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  background-color: rgb(244, 244, 244);
+}
+
+.filters {
+  padding: 0 15px 0 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.filters label {
+  margin-right: 5px;
+}
+
+.filters input,
+.filters select {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+@media (max-width: 767px) {
+  .filters label,
+  h3 {
+    display: none;
+  }
+}
